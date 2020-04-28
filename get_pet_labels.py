@@ -45,12 +45,14 @@ def get_pet_labels(image_dir):
     # Retrieve the filenames from folder pet_images/
     filename_list = listdir(image_dir)
 
-    # Print 10 of the filenames from folder pet_images/
-    print("\nPrints 10 filenames from folder pet_images/")
     for filename in filename_list:
-        pet_label = filename
-        results_dic[filename] =
+        pet_label_low = filename.lower()
+        pet_label_parts = pet_label_low.split('_')
+        pet_label = ''
+        for part in pet_label_parts:
+            if part.isalpha():
+                pet_label += part + ' '
 
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    return None
+        results_dic[filename] = [pet_label.strip()]
+
+    return results_dic
