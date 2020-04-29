@@ -61,6 +61,55 @@ def print_results(results_dic, results_stats_dic, model,
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
-    None
-                
+    """
+
+    print('\n\n*** Results Summary for CNN Model Architecture', model.upper(),
+          '***\n')
+
+    # print the counts
+    print('Counts:\n')
+    print('{:20}: {:3d}'.format('Image count', results_stats_dic['n_images']))
+    print('{:20}: {:3d}'.format('Dog image count', results_stats_dic['n_dogs_img']))
+    print('{:20}: {:3d}'.format('Not-Dog image count', results_stats_dic['n_notdogs_img']))
+    print('\n')
+
+    # print the percentages
+    print('Percentages:\n')
+    print('{:20}: {:6.2f}%'.format('Pct correct dogs', results_stats_dic['pct_correct_dogs']))
+    print('{:20}: {:6.2f}%'.format('Pct correct not-dogs', results_stats_dic['pct_correct_notdogs']))
+    print('{:20}: {:6.2f}%'.format('Pct correct breed', results_stats_dic['pct_correct_breed']))
+    print('{:20}: {:6.2f}%'.format('Pct correct match', results_stats_dic['pct_match']))
+    print('\n')
+
+    if print_incorrect_dogs:
+        print('Misclassified dogs:\n')
+
+        if results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] == results_stats_dic['n_images']:
+            print('All dogs were correctly classified.')
+        else:
+            print('{:40} | {:60}'.format('Image name', 'Classification result'))
+            print('{:_<100}'.format(''))
+            for image_name, result in results_dic.items():
+                # misclassified images are dogs classified as not dogs,
+                # or not dogs classified as dogs.
+                if (result[3] == 1 and result[4] == 0) or (result[3] == 0 and result[4] == 1):
+                    print('{:40} | {}'.format(image_name, result[1]))
+        print('\n')
+
+    if print_incorrect_breed:
+        print('Misclassified breed:\n')
+
+        if results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] == results_stats_dic['n_images']:
+            print('No incorrect classified breeds.\n')
+        else:
+            print('{:40} | {:60}'.format('Image name', 'Classification result'))
+            print('{:_<100}'.format(''))
+            for image_name, result in results_dic.items():
+                # a misclassified breed is when label is a dog (result[3] == 1) but no match between labels result[2] == 0
+                if result[3] == 1 and result[2] == 0:
+                    print('{:40} | {}'.format(image_name, result[1]))
+
+
+
+
+

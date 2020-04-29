@@ -5,7 +5,7 @@
 # TODO 0: Add your information below for Programmer & Date Created.                                                                             
 # PROGRAMMER: Jorrit Goddijn
 # DATE CREATED: 04-23-2020
-# REVISED DATE: 04-28-2020
+# REVISED DATE: 04-29-2020
 # PURPOSE: Classifies pet images using a pretrained CNN model, compares these
 #          classifications to the true identity of the pets in the images, and
 #          summarizes how well the CNN performed on the image classification task. 
@@ -117,8 +117,8 @@ def main():
     #      print_results(results, results_stats, in_arg.arch, True, True)
     # Prints summary results, incorrect classifications of dogs (if requested)
     # and incorrectly classified breeds (if requested)
-    print_results(results, results_stats, None, True, True)
-    
+    print_results(results, results_stats, in_arg.arch, True, True)
+
     # TODO 0: Measure total program runtime by collecting end time
     end_time = time()
     
